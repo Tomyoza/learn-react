@@ -31,94 +31,91 @@ Understand React fundamentals and get the project scaffolded and running locally
 ### Milestone
 App runs locally, navigation works between pages, and you can render a hardcoded list of benchmark results.
 
----
+## Week 3 — Routing + API Calls + Authentication
 
-## Week 3 — Authentication: Sign Up, Login + API Integration
+**Focus:** Core integration
 
-### Goal
-Connect the frontend to your REST API and implement sign up and login with JWT authentication.
+You already understand JWTs and REST — here you are wiring that knowledge into React's component lifecycle. This week will feel more familiar than week 2. It is also the direct preparation for what your instructor expects you to demonstrate in week 5.
 
-### Topics
-- `fetch` or `axios` for API calls
-- Sign up and login forms
-- Handling JWT tokens (store in `localStorage` or context)
-- Protected routes (redirect to login if not authenticated)
-- React Context for global auth state
+### Goals
 
-### Tasks
-- [ ] Build a Sign Up page with a form that calls `POST /auth/register`
-- [ ] Build a Login page with a form that calls `POST /auth/login`
-- [ ] Store the JWT token after successful login
-- [ ] Create an `AuthContext` to share auth state across the app
-- [ ] Build a `PrivateRoute` component that redirects unauthenticated users
-- [ ] Fetch and display real Benchmark Results from `GET /api/benchmarks`
+- Set up React Router with at least 3 routes (Login, Dashboard, a resource list)
+- Build a login form that POSTs to your API and stores the JWT
+- Create a protected route wrapper that redirects unauthenticated users
+- Fetch and display real data from your authenticated API
 
 ### Resources
-- [Using Fetch with async/await — MDN](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-- [Axios docs](https://axios-http.com/docs/intro)
-- [JWT authentication in React — DEV.to](https://dev.to/miracool/how-to-manage-user-authentication-with-react-js-3ic5)
 
-### Milestone
-You can sign up for a new account, log in, the token is stored, protected pages redirect unauthenticated users, and the Benchmark Results list loads real data from your API.
+- [React Router v6 docs](https://reactrouter.com/start/library/routing) — tutorial + `createBrowserRouter`
+- [react.dev — useContext](https://react.dev/reference/react/useContext) for sharing auth state across components
+- Store your JWT in `localStorage`, then attach it via a shared `fetch` wrapper or Axios interceptor
+
+### Milestones
+
+- [ ] Login works end-to-end against your real API
+- [ ] Visiting a protected route without a token redirects to `/login`
+- [ ] An authenticated GET request renders real data in the browser
 
 ---
 
-## Week 4 — Full CRUD for Benchmark Results
+## Week 4 — Build Something of Your Own
 
-### Goal
-Implement Create, Update, and Delete for the main entity with forms and confirmation flows.
+**Focus:** Independent project
 
-### Topics
-- Controlled form inputs with `useState`
-- Sending `POST`, `PUT`, `DELETE` requests with auth headers
-- Conditional rendering (show edit/delete buttons only when logged in)
-- Basic error handling and loading states
+> No tutorials. No AI-generated code. Use what you learned in weeks 2 and 3 to build something that works. It does not need to be polished — it needs to be yours.
 
-### Tasks
-- [ ] Build a Create form: `POST /api/benchmarks` with auth header
-- [ ] Add an Edit button on each result that opens an Update form: `PUT /api/benchmarks/:id`
-- [ ] Add a Delete button with a simple confirmation: `DELETE /api/benchmarks/:id`
-- [ ] Show loading spinners and error messages where appropriate
-- [ ] Make sure the list refreshes after create, update, or delete
+### Goals
+
+- Pick a small, concrete idea you can finish in 5–7 hours
+- Write every line yourself — struggle through errors rather than copying solutions
+- Apply at least: components, state, `useEffect`, and a fetch call
+- Get it running in the browser, broken edges and all
 
 ### Resources
-- [React forms — official docs](https://react.dev/reference/react-dom/components/input)
-- [How to make authenticated API requests](https://axios-http.com/docs/config_defaults)
 
-### Milestone
-A logged-in user can create, edit, and delete Benchmark Results. The list updates in real time after each action.
+- Your own notes and code from weeks 2 and 3 — that is the point
+- [react.dev API reference](https://react.dev/reference/react) — for looking things up, not following along
+- A public REST API (e.g. [JSONPlaceholder](https://jsonplaceholder.typicode.com)) if you want a backend without setup
+
+### Milestones
+
+- [ ] You can describe every line of your code and why it is there
+- [ ] The app does something visible in the browser
+- [ ] You hit at least one error you had to debug yourself and fix
 
 ---
 
-## Week 5 — Models Entity + Polish
+## Week 5 — Start Your API Frontend: HTTP + Login Flow
 
-### Goal
-Build out the Models frontend and polish the UI across all pages.
+**Focus:** Connect to your REST API
 
-### Topics
-- Reusing patterns from Week 4 for a second entity
-- Recharts for data visualization
-- Consistent styling and navigation
+By the end of this week you should feel confident making HTTP requests, handling responses, and building a login flow for an API that requires authentication — including how you make requests to your API and how you store the JWT, as shown in your instructor's video.
 
-### Tasks
-- [ ] Build Models: View All (`GET /api/models`), View One (`GET /api/models/:id`), Create form (`POST /api/models`)
-- [ ] Add a comparison chart using Recharts to visualize benchmark scores across models
-- [ ] Add navigation links to Models section in Navbar
-- [ ] Clean up styling for consistency across all pages
+### Goals
+
+- Make HTTP requests to your own REST API and handle the responses correctly
+- Build a login flow — form, POST to your auth endpoint, receive and store the JWT
+- Attach the JWT to subsequent requests the way your instructor demonstrates
+- Protect at least one route so unauthenticated users cannot reach it
 
 ### Resources
-- [Recharts getting started](https://recharts.org/en-US/guide/getting-started)
 
-### Milestone
-All CRUD for Benchmark Results works. Models section has View All, View One, and Create. Comparison chart renders real data.
+- Your instructor's video on making API requests and storing the JWT — watch it before writing code
+- [react.dev — Synchronizing with Effects](https://react.dev/learn/synchronizing-with-effects) for fetch inside `useEffect`
+- Browser devtools network tab — check that the `Authorization` header is present on every protected request
+
+### Milestones
+
+- [ ] Login form works against your real API and stores the JWT
+- [ ] At least one authenticated request succeeds and renders data
+- [ ] You can explain how the token is stored and how it gets attached to requests
 
 ---
 
-## Summary Checklist
+## Notes
 
-| Week | Focus | Done? |
-|------|-------|-------|
-| 2 | React basics + routing + project setup | ☐ |
-| 3 | Sign up + login + JWT + real API data | ☐ |
-| 4 | Full CRUD for Benchmark Results | ☐ |
-| 5 | Models frontend + comparison chart | ☐ |
+**Week 3 and week 5 are related.** Week 3 is the learning phase — you follow resources and build with guidance. Week 5 is where you demonstrate that same knowledge confidently against your own API, on your own. Week 3 is the preparation; week 5 is the proof.
+
+**Lean on your backend knowledge.** You already understand HTTP, JWTs, status codes, and CRUD semantics. The React learning curve is mostly the component model and state, not the API layer.
+
+**On JWT storage.** `localStorage` is the simplest starting point and fine for a course project. Know that `httpOnly` cookies are more secure in production, but do not let that slow you down now.
