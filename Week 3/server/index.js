@@ -4,7 +4,7 @@ import cors from 'cors';
 
 const app = express();
 const PORT = 3001;
-const JWT_SECRET = 'week3-learning-secret'; // Never hardcode secrets in real apps!
+const JWT_SECRET = 'week3-learning-secret';
 
 // --- Middleware ---
 app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from Vite dev server
@@ -12,7 +12,7 @@ app.use(express.json());
 
 // --- Fake database ---
 const USERS = [
-  { id: 1, username: 'demo', password: 'password123' }, // Plain text only for learning!
+  { id: 1, username: 'demo', password: 'password123' },
 ];
 
 const BENCHMARK_RESULTS = [
@@ -24,7 +24,7 @@ const BENCHMARK_RESULTS = [
   { id: 6, model: 'Llama 3 70B',        benchmark: 'MMLU',      score: 82.0, date: '2024-07-12' },
 ];
 
-// --- Auth middleware (reused by protected routes) ---
+// --- Auth middleware ---
 function requireAuth(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -34,7 +34,7 @@ function requireAuth(req, res, next) {
   const token = authHeader.split(' ')[1];
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    req.user = payload; // Attach decoded payload to the request
+    req.user = payload;
     next();
   } catch {
     return res.status(401).json({ error: 'Invalid or expired token' });
@@ -56,7 +56,7 @@ app.post('/api/login', (req, res) => {
   }
 
   const token = jwt.sign(
-    { userId: user.id, username: user.username }, // Payload
+    { userId: user.id, username: user.username },
     JWT_SECRET,
     { expiresIn: '1h' }
   );
