@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
   const [time, setTime] = useState(25 * 60);
@@ -35,15 +36,17 @@ function App() {
   }, [isRunning, isBreak]);
 
   return (
-    <div>
+    <div className="container">
       <h1>Pomodoro Timer</h1>
-      <p>{isBreak ? 'Break' : 'Work'}</p>
-      <p>{display}</p>
-      <button onClick={() => setIsRunning(!isRunning)}>
-        {isRunning ? 'Pause' : 'Start'}
-      </button>
-      <button onClick={() => { setTime(25 * 60); setIsRunning(false); setIsBreak(false); }}>Reset</button>
-      <button onClick={() => setIsBreak(true)}>Break</button>
+      <p className="mode">{isBreak ? 'Break' : 'Work'}</p>
+      <p className="timer">{display}</p>
+      <div className="controls">
+        <button className="btn-primary" onClick={() => setIsRunning(!isRunning)}>
+          {isRunning ? 'Pause' : 'Start'}
+        </button>
+        <button className="btn-secondary" onClick={() => { setTime(25 * 60); setIsRunning(false); setIsBreak(false); }}>Reset</button>
+        <button className="btn-secondary" onClick={() => setIsBreak(true)}>Break</button>
+      </div>
     </div>
   );
 }
