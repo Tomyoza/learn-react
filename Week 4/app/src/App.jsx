@@ -37,6 +37,7 @@ function App() {
   return (
     <div>
       <h1>Pomodoro Timer</h1>
+      <p>{isBreak ? 'Break' : 'Work'}</p>
       <p>{display}</p>
       <button onClick={() => setIsRunning(!isRunning)}>
         {isRunning ? 'Pause' : 'Start'}
