@@ -7,17 +7,32 @@ function App() {
   const [isBreak, setIsBreak] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const minutes = Math.floor(time / 60);  
-  const seconds = time % 60;
-  const display = `${minutes}:${String(seconds).padStart(2, '0')}`;
+  const currentTime = isBreak ? breakTime : time;
+  const minutes = Math.floor(currentTime / 60);
+  const seconds = currentTime % 60;
+  const display = `${minutes}:${String(seconds).padStart(2, '0')}`;  
 
   useEffect(() => {
     if (!isRunning) return;
     const interval = setInterval(() => {
-      setTime(prev => prev - 1);
+      if (isBreak) {
+        setBreakTime(prev => prev - 1);
+        if (breakTime === 0) {
+          setIsBreak(false);
+          setIsRunning(false);
+        }
+      } else {
+        setTime(prev => {
+          if (prev <= 1) {
+            setIsRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }
     }, 1000);
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, isBreak]);
 
   return (
     <div>
@@ -26,8 +41,8 @@ function App() {
       <button onClick={() => setIsRunning(!isRunning)}>
         {isRunning ? 'Pause' : 'Start'}
       </button>
-      <button onClick={() => setTime(25 * 60)}>Reset</button>
-      <button onClick={() => setBreakTime(5 * 60)}>Break</button>
+      <button onClick={() => { setTime(25 * 60); setIsRunning(false); setIsBreak(false); }}>Reset</button>
+      <button onClick={() => setIsBreak(true)}>Break</button>
     </div>
   );
 }
