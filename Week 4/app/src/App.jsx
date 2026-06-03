@@ -6,7 +6,6 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [breakTime, setBreakTime] = useState(5 * 60);
   const [isBreak, setIsBreak] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const currentTime = isBreak ? breakTime : time;
   const minutes = Math.floor(currentTime / 60);
